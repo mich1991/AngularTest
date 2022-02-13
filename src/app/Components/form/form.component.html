@@ -1,12 +1,18 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>Add User </mat-card-title>
-    <button mat-raised-button color="secondary" class="inline">
+    <button
+      mat-raised-button
+      color="secondary"
+      class="inline"
+      (click)="openDialog()"
+    >
       Add More Details
     </button>
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="userForm" (submit)="onSubmit()">
+      <!-- FIRST NAME -->
       <mat-form-field appearance="fill">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstName" />
@@ -19,7 +25,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-
+      <!-- LAST NAME -->
       <mat-form-field appearance="fill">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" />
@@ -32,7 +38,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-
+      <!-- PASSWORD -->
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input
@@ -43,20 +49,28 @@
         <mat-icon color="primary" matSuffix (click)="togglePassword()">
           {{ showPassword ? "visibility_off" : "visibility" }}
         </mat-icon>
+        <mat-error>
+          <span *ngIf="userForm.controls['lastName'].errors?.['required']">
+            This field is mandatory.
+          </span>
+          <span *ngIf="userForm.controls['lastName'].errors?.['minlength']">
+            Last name needs to have 3 or more letters.
+          </span>
+        </mat-error>
       </mat-form-field>
-
-      <mat-form-field appearance="fill">
+      <!-- PHONE NUMBER -->
+      <mat-form-field appearance="fill" *ngIf="addPhoneField">
         <mat-label>Phone Number</mat-label>
         <input matInput formControlName="phoneNumber" />
       </mat-form-field>
-
-      <mat-form-field appearance="fill">
+      <!-- EMAIL -->
+      <mat-form-field appearance="fill" *ngIf="addEmailField">
         <mat-label>Email Address</mat-label>
         <input matInput formControlName="email" />
       </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Textarea</mat-label>
+      <!-- HOBBIES -->
+      <mat-form-field appearance="fill" *ngIf="addHobbyField">
+        <mat-label>Hobbies</mat-label>
         <textarea matInput></textarea>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Submit</button>
@@ -65,3 +79,4 @@
 </mat-card>
 
 <p>Form Value: {{ userForm.value | json }}</p>
+<p>Hobbies boolean : {{ addHobbyField }}</p>
