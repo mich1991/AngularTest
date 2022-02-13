@@ -17,15 +17,40 @@ export class FormComponent implements OnInit {
   addPhoneRequired: boolean = false;
 
   showPassword: boolean = false;
+
+  // REGEX FOR VALIDATIONS
+  // Stack overflow
   emailRegx =
     /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+
+  // Stack overflow
+  passwordRegx =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{7,}$/;
+
+  phoneNumberRegx = /^[0-9]*$/;
+
+  // VALIDATORS
+  phoneNumberValidator = this.addPhoneRequired
+    ? [Validators.pattern(this.phoneNumberRegx), Validators.required]
+    : [Validators.pattern(this.phoneNumberRegx)];
+
+  emailValidator = this.addEmailRequired
+    ? [Validators.pattern(this.emailRegx), Validators.required]
+    : [Validators.pattern(this.emailRegx)];
 
   userForm = this.fb.group({
     firstName: ['', [Validators.required, Validators.minLength(3)]],
     lastName: ['', [Validators.required, Validators.minLength(3)]],
-    password: ['', Validators.required],
-    phoneNumber: [''],
-    email: ['', [Validators.pattern(this.emailRegx)]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(7),
+        Validators.pattern(this.passwordRegx),
+      ],
+    ],
+    phoneNumber: ['', this.phoneNumberValidator],
+    email: ['', this.emailValidator],
     hobbies: [''],
   });
 
@@ -56,7 +81,6 @@ export class FormComponent implements OnInit {
         this.addPhoneField = result.phone;
         this.addEmailField = result.email;
         this.addHobbyField = result.hobbies;
-
         this.addEmailRequired = result.emailRequired;
         this.addPhoneRequired = result.phoneRequired;
       }

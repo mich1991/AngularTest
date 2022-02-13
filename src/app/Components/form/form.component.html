@@ -62,6 +62,14 @@
       <mat-form-field appearance="fill" *ngIf="addPhoneField">
         <mat-label>Phone Number</mat-label>
         <input matInput formControlName="phoneNumber" />
+        <mat-error>
+          <span *ngIf="userForm.controls['phoneNumber'].errors?.['required']">
+            This field is mandatory.
+          </span>
+          <span *ngIf="userForm.controls['phoneNumber'].errors?.['pattern']">
+            Only numbers allowed
+          </span>
+        </mat-error>
       </mat-form-field>
       <!-- EMAIL -->
       <mat-form-field appearance="fill" *ngIf="addEmailField">
@@ -85,3 +93,4 @@
 
 <p>Form Value: {{ userForm.value | json }}</p>
 <p>Hobbies boolean : {{ addHobbyField }}</p>
+<p>Phone required : {{ addPhoneRequired }}</p>
