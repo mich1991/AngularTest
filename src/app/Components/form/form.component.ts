@@ -10,7 +10,7 @@ import { FormDialogComponent } from '../form-dialog/form-dialog.component';
 })
 export class FormComponent implements OnInit {
   addPhoneField: boolean = false;
-  addEmailField: boolean = true;
+  addEmailField: boolean = false;
   addHobbyField: boolean = false;
 
   addEmailRequired: boolean = false;
@@ -25,7 +25,7 @@ export class FormComponent implements OnInit {
 
   // Stack overflow
   passwordRegx =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{7,}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{7,})/;
 
   phoneNumberRegx = /^[0-9]*$/;
 
@@ -63,6 +63,11 @@ export class FormComponent implements OnInit {
   }
   onSubmit(): void {
     console.log(this.userForm);
+    if (this.userForm.status === 'VALID') {
+      console.log('Success!');
+    } else {
+      console.log('Form Invalid');
+    }
   }
   openDialog() {
     const dialogRef = this.dialog.open(FormDialogComponent, {

@@ -4,5 +4,14 @@ form {
 }
 
 .inline {
-  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mat-card-header .mat-card-title {
+  margin: 0;
+}
+
+.button {
+  margin-top: 15px;
 }

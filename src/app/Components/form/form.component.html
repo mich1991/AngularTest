@@ -1,12 +1,7 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Add User </mat-card-title>
-    <button
-      mat-raised-button
-      color="secondary"
-      class="inline"
-      (click)="openDialog()"
-    >
+  <mat-card-header class="inline">
+    <mat-card-title>Add User</mat-card-title>
+    <button mat-raised-button color="secondary" (click)="openDialog()">
       Add More Details
     </button>
   </mat-card-header>
@@ -50,11 +45,12 @@
           {{ showPassword ? "visibility_off" : "visibility" }}
         </mat-icon>
         <mat-error>
-          <span *ngIf="userForm.controls['lastName'].errors?.['required']">
+          <span *ngIf="userForm.controls['password'].errors?.['required']">
             This field is mandatory.
           </span>
-          <span *ngIf="userForm.controls['lastName'].errors?.['minlength']">
-            Last name needs to have 3 or more letters.
+          <span *ngIf="userForm.controls['password'].errors?.['pattern']">
+            Password needs to contain at least 1 capital letter, 1 small letter
+            and 1 special character
           </span>
         </mat-error>
       </mat-form-field>
@@ -75,6 +71,14 @@
       <mat-form-field appearance="fill" *ngIf="addEmailField">
         <mat-label>Email Address</mat-label>
         <input matInput formControlName="email" />
+        <mat-error>
+          <span *ngIf="userForm.controls['email'].errors?.['required']">
+            This field is mandatory.
+          </span>
+          <span *ngIf="userForm.controls['email'].errors?.['pattern']">
+            Use correct email address.
+          </span>
+        </mat-error>
       </mat-form-field>
       <!-- HOBBIES -->
       <mat-form-field appearance="fill" *ngIf="addHobbyField">
@@ -86,11 +90,9 @@
           cdkAutosizeMaxRows="5"
         ></textarea>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit" class="button">
+        Submit
+      </button>
     </form>
   </mat-card-content>
 </mat-card>
-
-<p>Form Value: {{ userForm.value | json }}</p>
-<p>Hobbies boolean : {{ addHobbyField }}</p>
-<p>Phone required : {{ addPhoneRequired }}</p>
