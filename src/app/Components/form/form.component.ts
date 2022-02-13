@@ -89,7 +89,9 @@ export class FormComponent implements OnInit {
         this.addHobbyField = result.hobbies;
         this.addEmailRequired = result.emailRequired;
         this.addPhoneRequired = result.phoneRequired;
-        if (this.addPhoneRequired === true) {
+
+        // Validation Changes
+        if (this.addPhoneRequired) {
           this.userForm.controls['phoneNumber'].addValidators(
             Validators.required
           );
@@ -98,7 +100,7 @@ export class FormComponent implements OnInit {
             Validators.required
           );
         }
-        if (this.addEmailRequired === true) {
+        if (this.addEmailRequired) {
           this.userForm.controls['email'].addValidators(Validators.required);
         } else {
           this.userForm.controls['email'].removeValidators(Validators.required);
