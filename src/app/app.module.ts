@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,6 +32,7 @@ import { FormDialogComponent } from './Components/form-dialog/form-dialog.compon
     MatCardModule,
     MatIconModule,
     MatDialogModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

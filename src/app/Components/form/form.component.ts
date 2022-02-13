@@ -51,15 +51,15 @@ export class FormComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result:`);
-      console.log(result);
+      // After using Cancel button result may be undefined that's why if statement is here.
+      if (result) {
+        this.addPhoneField = result.phone;
+        this.addEmailField = result.email;
+        this.addHobbyField = result.hobbies;
 
-      this.addPhoneField = result.phone;
-      this.addEmailField = result.email;
-      this.addHobbyField = result.hobbies;
-
-      this.addEmailRequired = result.emailRequired;
-      this.addPhoneRequired = result.phoneRequired;
+        this.addEmailRequired = result.emailRequired;
+        this.addPhoneRequired = result.phoneRequired;
+      }
     });
   }
 }

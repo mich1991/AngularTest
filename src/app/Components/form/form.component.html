@@ -71,7 +71,12 @@
       <!-- HOBBIES -->
       <mat-form-field appearance="fill" *ngIf="addHobbyField">
         <mat-label>Hobbies</mat-label>
-        <textarea matInput></textarea>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+        ></textarea>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Submit</button>
     </form>

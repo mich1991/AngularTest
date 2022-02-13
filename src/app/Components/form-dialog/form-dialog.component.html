@@ -1,11 +1,21 @@
 <h1 mat-dialog-title>Which fields would you likie to add to the form?</h1>
 
 <div mat-dialog-content class="content" [formGroup]="dialogForm">
-  <div>
+  <div class="flex-between">
     <mat-checkbox formControlName="phone">Phone Number</mat-checkbox>
+    <mat-slide-toggle
+      *ngIf="dialogForm.value.phone"
+      formControlName="phoneRequired"
+      >Required</mat-slide-toggle
+    >
   </div>
-  <div>
+  <div class="flex-between">
     <mat-checkbox formControlName="email">Email</mat-checkbox>
+    <mat-slide-toggle
+      *ngIf="dialogForm.value.email"
+      formControlName="emailRequired"
+      >Required</mat-slide-toggle
+    >
   </div>
   <mat-checkbox formControlName="hobbies">Hobbies</mat-checkbox>
 </div>
