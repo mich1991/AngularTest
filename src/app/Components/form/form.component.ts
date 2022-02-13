@@ -30,6 +30,7 @@ export class FormComponent implements OnInit {
   phoneNumberRegx = /^[0-9]*$/;
 
   // VALIDATORS
+  // Błędne podejście , kod zostawiam dla zapoznania z moim 1 sposobem podejścia do problemu.
   phoneNumberValidator = this.addPhoneRequired
     ? [Validators.pattern(this.phoneNumberRegx), Validators.required]
     : [Validators.pattern(this.phoneNumberRegx)];
@@ -88,6 +89,20 @@ export class FormComponent implements OnInit {
         this.addHobbyField = result.hobbies;
         this.addEmailRequired = result.emailRequired;
         this.addPhoneRequired = result.phoneRequired;
+        if (this.addPhoneRequired === true) {
+          this.userForm.controls['phoneNumber'].addValidators(
+            Validators.required
+          );
+        } else {
+          this.userForm.controls['phoneNumber'].removeValidators(
+            Validators.required
+          );
+        }
+        if (this.addEmailRequired === true) {
+          this.userForm.controls['email'].addValidators(Validators.required);
+        } else {
+          this.userForm.controls['email'].removeValidators(Validators.required);
+        }
       }
     });
   }
